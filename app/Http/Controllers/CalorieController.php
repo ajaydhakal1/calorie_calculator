@@ -17,6 +17,8 @@ class CalorieController extends Controller
             'activity_level' => 'required|integer|between:1,5',
         ]);
 
+        session(['calorie_data' => $data]);
+
         $bmr = 0;
 
         // BMR Calculation based on gender
@@ -64,14 +66,21 @@ class CalorieController extends Controller
             'extremeDeficit',
             'minimalSurplus',
             'balancedSurplus',
-            'extremeSurplus'
+            'extremeSurplus',
+            'data'
         ));
+    }
+
+    public function dietPlan(){
+        $data = session('calorie_data', []);
+        // dd($data);
+        return view('diet_plan', compact('data'));
     }
 
 
     public function showHistory()
     {
-        $userHistories = auth()->user()->histories()->latest()->get();
+        $userHistories = Auth::user()->histories()->latest()->get();
         return view('user_history', compact('userHistories'));
     }
 
