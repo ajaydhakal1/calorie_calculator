@@ -21,7 +21,10 @@
                     </label>
                     <input type="number" name="age" id="age" required
                         class="block w-full px-4 py-3 rounded-xl border border-gray-200 dark:border-gray-700 text-gray-900 dark:text-white bg-white dark:bg-gray-900 focus:ring-2 focus:ring-blue-500 dark:focus:ring-blue-600 focus:border-transparent transition-all duration-200"
-                        value="{{ $data['age'] }}" placeholder="Enter your age">
+                        value="{{ old('age', $data['age'] ?? '') }}" placeholder="Enter your age">
+                    @error('age')
+                        <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
+                    @enderror
                 </div>
 
                 <!-- Gender Select -->
@@ -31,15 +34,17 @@
                     </label>
                     <select name="gender" id="gender" required
                         class="block w-full px-4 py-3 rounded-xl border border-gray-200 dark:border-gray-700 text-gray-900 dark:text-white bg-white dark:bg-gray-900 focus:ring-2 focus:ring-blue-500 dark:focus:ring-blue-600 focus:border-transparent transition-all duration-200">
-                        <option value="" disabled {{ empty($data['gender']) ? 'selected' : '' }}>Select your
-                            gender</option>
-                        <option value="male"
-                            {{ isset($data['gender']) && $data['gender'] == 'male' ? 'selected' : '' }}>Male</option>
-                        <option value="female"
-                            {{ isset($data['gender']) && $data['gender'] == 'female' ? 'selected' : '' }}>Female
+                        <option value="" disabled
+                            {{ empty(old('gender', $data['gender'] ?? '')) ? 'selected' : '' }}>Select your gender
                         </option>
+                        <option value="male" {{ old('gender', $data['gender'] ?? '') == 'male' ? 'selected' : '' }}>
+                            Male</option>
+                        <option value="female" {{ old('gender', $data['gender'] ?? '') == 'female' ? 'selected' : '' }}>
+                            Female</option>
                     </select>
-
+                    @error('gender')
+                        <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
+                    @enderror
                 </div>
 
                 <!-- Height Input -->
@@ -50,12 +55,15 @@
                     <div class="relative">
                         <input type="number" name="height" id="height" required
                             class="block w-full px-4 py-3 rounded-xl border border-gray-200 dark:border-gray-700 text-gray-900 dark:text-white bg-white dark:bg-gray-900 focus:ring-2 focus:ring-blue-500 dark:focus:ring-blue-600 focus:border-transparent transition-all duration-200"
-                            value="{{ $data['height'] }}" placeholder="Enter your height">
+                            value="{{ old('height', $data['height'] ?? '') }}" placeholder="Enter your height">
                         <span
                             class="absolute right-4 top-1/2 -translate-y-1/2 text-gray-500 dark:text-gray-400 text-sm">
                             cm
                         </span>
                     </div>
+                    @error('height')
+                        <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
+                    @enderror
                 </div>
 
                 <!-- Weight Input -->
@@ -66,12 +74,15 @@
                     <div class="relative">
                         <input type="number" name="weight" id="weight" required
                             class="block w-full px-4 py-3 rounded-xl border border-gray-200 dark:border-gray-700 text-gray-900 dark:text-white bg-white dark:bg-gray-900 focus:ring-2 focus:ring-blue-500 dark:focus:ring-blue-600 focus:border-transparent transition-all duration-200"
-                            value="{{ $data['weight'] }}" placeholder="Enter your weight">
+                            value="{{ old('weight', $data['weight'] ?? '') }}" placeholder="Enter your weight">
                         <span
                             class="absolute right-4 top-1/2 -translate-y-1/2 text-gray-500 dark:text-gray-400 text-sm">
                             kg
                         </span>
                     </div>
+                    @error('weight')
+                        <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
+                    @enderror
                 </div>
 
                 <!-- Activity Level Select -->
@@ -81,25 +92,54 @@
                     </label>
                     <select name="activity_level" id="activity_level" required
                         class="block w-full px-4 py-3 rounded-xl border border-gray-200 dark:border-gray-700 text-gray-900 dark:text-white bg-white dark:bg-gray-900 focus:ring-2 focus:ring-blue-500 dark:focus:ring-blue-600 focus:border-transparent transition-all duration-200">
-                        <option value="" disabled {{ empty($data['activity_level']) ? 'selected' : '' }}>Select
+                        <option value="" disabled
+                            {{ empty(old('activity_level', $data['activity_level'] ?? '')) ? 'selected' : '' }}>Select
                             your activity level</option>
                         <option value="1"
-                            {{ isset($data['activity_level']) && $data['activity_level'] == 1 ? 'selected' : '' }}>
-                            Sedentary</option>
+                            {{ old('activity_level', $data['activity_level'] ?? '') == 1 ? 'selected' : '' }}>Sedentary
+                        </option>
                         <option value="2"
-                            {{ isset($data['activity_level']) && $data['activity_level'] == 2 ? 'selected' : '' }}>
-                            Lightly Active</option>
+                            {{ old('activity_level', $data['activity_level'] ?? '') == 2 ? 'selected' : '' }}>Lightly
+                            Active</option>
                         <option value="3"
-                            {{ isset($data['activity_level']) && $data['activity_level'] == 3 ? 'selected' : '' }}>
+                            {{ old('activity_level', $data['activity_level'] ?? '') == 3 ? 'selected' : '' }}>
                             Moderately Active</option>
                         <option value="4"
-                            {{ isset($data['activity_level']) && $data['activity_level'] == 4 ? 'selected' : '' }}>
-                            Very Active</option>
+                            {{ old('activity_level', $data['activity_level'] ?? '') == 4 ? 'selected' : '' }}>Very
+                            Active</option>
                         <option value="5"
-                            {{ isset($data['activity_level']) && $data['activity_level'] == 5 ? 'selected' : '' }}>
-                            Super Active</option>
+                            {{ old('activity_level', $data['activity_level'] ?? '') == 5 ? 'selected' : '' }}>Super
+                            Active</option>
                     </select>
+                    @error('activity_level')
+                        <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
+                    @enderror
+                </div>
 
+                <!-- Food Type Select -->
+                <div class="space-y-2">
+                    <label for="food_type" class="block text-sm font-medium text-gray-700 dark:text-gray-300">
+                        Food Type
+                    </label>
+                    <select name="food_type" id="food_type" required
+                        class="block w-full px-4 py-3 rounded-xl border border-gray-200 dark:border-gray-700 text-gray-900 dark:text-white bg-white dark:bg-gray-900 focus:ring-2 focus:ring-blue-500 dark:focus:ring-blue-600 focus:border-transparent transition-all duration-200">
+                        <option value="" disabled
+                            {{ empty(old('food_type', $data['food_type'] ?? '')) ? 'selected' : '' }}>Select
+                            your food preference</option>
+                        <option value="vegetarian"
+                            {{ old('food_type', $data['food_type'] ?? '') == 'vegetarian' ? 'selected' : '' }}>
+                            Vegetarian
+                        </option>
+                        <option value="non-veg"
+                            {{ old('food_type', $data['food_type'] ?? '') == 'non-veg' ? 'selected' : '' }}>Non Veg
+                        </option>
+                        <option value="vegan"
+                            {{ old('food_type', $data['food_type'] ?? '') == 'vegan' ? 'selected' : '' }}>Vegan
+                        </option>
+                    </select>
+                    @error('food_type')
+                        <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
+                    @enderror
                 </div>
 
                 <!-- Goal Select -->
@@ -109,11 +149,21 @@
                     </label>
                     <select name="goal" id="goal" required
                         class="block w-full px-4 py-3 rounded-xl border border-gray-200 dark:border-gray-700 text-gray-900 dark:text-white bg-white dark:bg-gray-900 focus:ring-2 focus:ring-blue-500 dark:focus:ring-blue-600 focus:border-transparent transition-all duration-200">
-                        <option value="" disabled selected>Select your goal</option>
-                        <option value="weight_loss">Weight Loss</option>
-                        <option value="weight_gain">Weight Gain</option>
-                        <option value="maintenance">Maintenance</option>
+                        <option value="" disabled
+                            {{ empty(old('goal', $data['goal'] ?? '')) ? 'selected' : '' }}>Select your goal</option>
+                        <option value="weight_loss"
+                            {{ old('goal', $data['goal'] ?? '') == 'weight_loss' ? 'selected' : '' }}>Weight Loss
+                        </option>
+                        <option value="weight_gain"
+                            {{ old('goal', $data['goal'] ?? '') == 'weight_gain' ? 'selected' : '' }}>Weight Gain
+                        </option>
+                        <option value="maintenance"
+                            {{ old('goal', $data['goal'] ?? '') == 'maintenance' ? 'selected' : '' }}>Maintenance
+                        </option>
                     </select>
+                    @error('goal')
+                        <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
+                    @enderror
                 </div>
 
                 <!-- Submit Button -->

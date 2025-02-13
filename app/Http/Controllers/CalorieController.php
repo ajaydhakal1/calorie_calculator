@@ -10,10 +10,10 @@ class CalorieController extends Controller
     public function calculate(Request $request)
     {
         $data = $request->validate([
-            'age' => 'required|integer',
+            'age' => 'required|integer|min:3|max:100',
             'gender' => 'required|in:male,female',
-            'height' => 'required|numeric',
-            'weight' => 'required|numeric',
+            'height' => 'required|numeric|max:220',
+            'weight' => 'required|numeric|max:220',
             'activity_level' => 'required|integer|between:1,5',
         ]);
 
@@ -83,6 +83,4 @@ class CalorieController extends Controller
         $userHistories = Auth::user()->histories()->latest()->get();
         return view('user_history', compact('userHistories'));
     }
-
-
 }

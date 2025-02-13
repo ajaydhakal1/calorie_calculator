@@ -23,6 +23,7 @@
                     @endguest
                     <form method="POST" action="{{ route('calculate') }}" class="space-y-8">
                         @csrf
+
                         <div
                             class="bg-white/95 backdrop-blur-sm rounded-2xl shadow-xl p-6 sm:p-8 space-y-6 dark:bg-gray-800 dark:bg-opacity-80">
                             <h3 class="text-2xl font-bold text-gray-900 dark:text-gray-100">Enter Your Details</h3>
@@ -32,9 +33,11 @@
                                 <label for="age"
                                     class="block text-sm font-medium text-gray-700 dark:text-gray-300">Age
                                     (years)</label>
-                                <input type="number" name="age" id="age" required
-                                    class="block w-full rounded-lg border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm transition-colors duration-200 dark:bg-gray-700 dark:border-gray-600 dark:text-gray-300 dark:focus:ring-indigo-500"
-                                    placeholder="Enter your age">
+                                <input type="number" name="age" id="age" required value="{{ old('age') }}"
+                                    class="block w-full rounded-lg border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm transition-colors duration-200 dark:bg-gray-700 dark:border-gray-600 dark:text-gray-300 dark:focus:ring-indigo-500">
+                                @error('age')
+                                    <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
+                                @enderror
                             </div>
 
                             <!-- Gender Select -->
@@ -43,9 +46,15 @@
                                     class="block text-sm font-medium text-gray-700 dark:text-gray-300">Gender</label>
                                 <select name="gender" id="gender" required
                                     class="block w-full rounded-lg border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm transition-colors duration-200 dark:bg-gray-700 dark:border-gray-600 dark:text-gray-300 dark:focus:ring-indigo-500">
-                                    <option value="male">Male</option>
-                                    <option value="female">Female</option>
+                                    <option value="" disabled {{ old('gender') ? '' : 'selected' }}>Select your
+                                        gender</option>
+                                    <option value="male" {{ old('gender') == 'male' ? 'selected' : '' }}>Male</option>
+                                    <option value="female" {{ old('gender') == 'female' ? 'selected' : '' }}>Female
+                                    </option>
                                 </select>
+                                @error('gender')
+                                    <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
+                                @enderror
                             </div>
 
                             <!-- Height Input -->
@@ -53,9 +62,11 @@
                                 <label for="height"
                                     class="block text-sm font-medium text-gray-700 dark:text-gray-300">Height
                                     (cm)</label>
-                                <input type="number" name="height" id="height" required
-                                    class="block w-full rounded-lg border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm transition-colors duration-200 dark:bg-gray-700 dark:border-gray-600 dark:text-gray-300 dark:focus:ring-indigo-500"
-                                    placeholder="Enter your height">
+                                <input type="number" name="height" id="height" required value="{{ old('height') }}"
+                                    class="block w-full rounded-lg border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm transition-colors duration-200 dark:bg-gray-700 dark:border-gray-600 dark:text-gray-300 dark:focus:ring-indigo-500">
+                                @error('height')
+                                    <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
+                                @enderror
                             </div>
 
                             <!-- Weight Input -->
@@ -63,9 +74,11 @@
                                 <label for="weight"
                                     class="block text-sm font-medium text-gray-700 dark:text-gray-300">Weight
                                     (kg)</label>
-                                <input type="number" name="weight" id="weight" required
-                                    class="block w-full rounded-lg border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm transition-colors duration-200 dark:bg-gray-700 dark:border-gray-600 dark:text-gray-300 dark:focus:ring-indigo-500"
-                                    placeholder="Enter your weight">
+                                <input type="number" name="weight" id="weight" required value="{{ old('weight') }}"
+                                    class="block w-full rounded-lg border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm transition-colors duration-200 dark:bg-gray-700 dark:border-gray-600 dark:text-gray-300 dark:focus:ring-indigo-500">
+                                @error('weight')
+                                    <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
+                                @enderror
                             </div>
 
                             <!-- Activity Level Select -->
@@ -75,12 +88,22 @@
                                     Level</label>
                                 <select name="activity_level" id="activity_level" required
                                     class="block w-full rounded-lg border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm transition-colors duration-200 dark:bg-gray-700 dark:border-gray-600 dark:text-gray-300 dark:focus:ring-indigo-500">
-                                    <option value="1">Sedentary (little to no exercise)</option>
-                                    <option value="2">Lightly Active (1-3 days/week)</option>
-                                    <option value="3">Moderately Active (3-5 days/week)</option>
-                                    <option value="4">Very Active (6-7 days/week)</option>
-                                    <option value="5">Super Active (physical job or 2x training)</option>
+                                    <option value="" disabled {{ old('activity_level') ? '' : 'selected' }}>
+                                        Select your activity level</option>
+                                    <option value="1" {{ old('activity_level') == 1 ? 'selected' : '' }}>Sedentary
+                                        (little to no exercise)</option>
+                                    <option value="2" {{ old('activity_level') == 2 ? 'selected' : '' }}>Lightly
+                                        Active (1-3 days/week)</option>
+                                    <option value="3" {{ old('activity_level') == 3 ? 'selected' : '' }}>
+                                        Moderately Active (3-5 days/week)</option>
+                                    <option value="4" {{ old('activity_level') == 4 ? 'selected' : '' }}>Very
+                                        Active (6-7 days/week)</option>
+                                    <option value="5" {{ old('activity_level') == 5 ? 'selected' : '' }}>Super
+                                        Active (physical job or 2x training)</option>
                                 </select>
+                                @error('activity_level')
+                                    <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
+                                @enderror
                             </div>
 
                             <!-- Submit Button -->
@@ -90,6 +113,7 @@
                             </button>
                         </div>
                     </form>
+
                 </div>
             </div>
         </div>

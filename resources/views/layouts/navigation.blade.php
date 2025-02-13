@@ -14,8 +14,8 @@
             <div class="flex flex-1 items-center">
                 <!-- Logo -->
                 <div class="shrink-0">
-                    <a href="{{ route('dashboard') }}" class="transition duration-150 hover:opacity-80">
-                        <x-application-logo class="block h-9 w-auto fill-current text-gray-800 dark:text-gray-200" />
+                    <a href="{{ route('home') }}" class="transition duration-150 hover:opacity-80">
+                        <img src="logo.png" alt="logo" width="100px">
                     </a>
                 </div>
 
@@ -24,6 +24,10 @@
                     <x-nav-link :href="route('home')" :active="request()->routeIs('home')"
                         class="text-sm font-medium text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white transition duration-150 hover:bg-gray-100 dark:hover:bg-gray-800 px-3 py-2 rounded-lg">
                         {{ __('Home') }}
+                    </x-nav-link>
+                    <x-nav-link :href="route('diet.plan')" :active="request()->routeIs('diet.plan')"
+                        class="text-sm font-medium text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white transition duration-150 hover:bg-gray-100 dark:hover:bg-gray-800 px-3 py-2 rounded-lg">
+                        {{ __('Free Diet Plan') }}
                     </x-nav-link>
                     @auth
                         <x-nav-link :href="route('my_history')" :active="request()->routeIs('my_history')"

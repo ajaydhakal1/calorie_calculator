@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\CalorieController;
 use App\Http\Controllers\DietPlanController;
+use App\Http\Controllers\GoogleAuthController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
@@ -30,5 +31,12 @@ Route::get('/diet-plan', function () {
 })->name('diet.plan');
 
 Route::post('/diet-plan', [DietPlanController::class, 'generate'])->name('diet.plan.generate');
+
+
+Route::get('/auth/{provider}/redirect', [GoogleAuthController::class, 'redirect'])
+    ->name('socialite.redirect');
+Route::get('/auth/{provider}/callback', [GoogleAuthController::class, 'callback'])
+    ->name('socialite.callback');
+
 
 require __DIR__ . '/auth.php';

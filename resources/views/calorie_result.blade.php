@@ -122,16 +122,16 @@
                 </div>
             </div>
 
-            
+
             <!-- Call to Action -->
-            <div class="mt-12 text-center">
+            <div class="mt-12 text-center space-x-4">
                 <a href="{{ route('home') }}"
-                    class="inline-flex items-center px-8 py-4 text-lg font-medium text-white bg-blue-600 rounded-full hover:bg-blue-700 transform transition-all duration-200 hover:scale-105 shadow-lg hover:shadow-xl">
-                    Calculate Again
+                    class="inline-flex items-center px-6 py-3 text-lg font-semibold text-white bg-blue-600 rounded-full shadow-md hover:bg-blue-700 transition duration-300 transform hover:scale-105">
+                    <span class="mr-2">🔄</span> Calculate Again
                 </a>
-                <a href="{{ route('dietplan', ['data'=>'data']) }}"
-                    class="inline-flex items-center px-8 py-4 text-lg font-medium text-white bg-blue-600 rounded-full hover:bg-blue-700 transform transition-all duration-200 hover:scale-105 shadow-lg hover:shadow-xl">
-                    Get Diet Plan
+                <a href="{{ route('dietplan', ['data' => 'data']) }}"
+                    class="inline-flex items-center px-6 py-3 text-lg font-semibold text-white bg-blue-600 rounded-full shadow-md hover:bg-blue-700 transition duration-300 transform hover:scale-105">
+                    <span class="mr-2">📋</span> Get Diet Plan
                 </a>
             </div>
         </div>
